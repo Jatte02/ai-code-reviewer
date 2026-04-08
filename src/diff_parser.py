@@ -35,3 +35,24 @@ def detect_language(filename:str) -> str:
         return "Unknown"
 
 
+def parse_files(files:list) -> list[ParsedFile]:
+    parsed_files = []
+    extensions_ignore = ["md", "txt", "lock", "png", "jpg", "exe"]
+
+    for file in files:
+        if not file.patch:
+            continue
+        parts = file.filename.split('.')
+        extension = parts[-1]
+        if extension in extensions_ignore:
+            continue
+        lines = file.patch.split('\n')
+        amount_lines = len(lines)
+        if amount_lines > 500:
+            patch = '\n'.join(lines[:500])
+        else:
+            patch = file.patch
+
+    return 
+
+            
